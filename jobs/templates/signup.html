@@ -1,0 +1,106 @@
+{% extends 'basic.html' %}
+
+{% block title %} User Signup Page {% endblock %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% block user_login %} active {% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<style>
+  
+    #login-form-wrap {
+  background-color: #ece7e7;
+  width: 75%;
+  height: 500px;
+  margin: 30px auto;
+  text-align: center;
+  padding: 30px 0 0 0;
+  padding-bottom: 2px;
+  border-radius: 2rem;
+  box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+<div id="login-form-wrap">
+   
+
+<form class="container mt-4" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter First Name"  style="border-radius: 2rem;" pattern="[A-Za-z]+" title="Only alphabetical characters allowed" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Last Name"  style="border-radius: 2rem;" pattern="[A-Za-z]+" title="Only alphabetical characters allowed" required>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password1" id="password1" placeholder="Enter Password"  style="border-radius: 2rem;" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" 
+            title="Password must be at least 8 characters long, contain at least one letter, one number." 
+            required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" name="password2" id="password2" placeholder="Confirm Password"  style="border-radius: 2rem;" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" style="border-radius: 2rem;" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Contact Number</label>
+            <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Contact Number" pattern="[0-9]{10}" title="Contact number not more than 10 digits and not less then 10 digits." style="border-radius: 2rem;" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label>Gender</label>
+            <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 2rem;">
+            <div class="form-check form-check-inline">
+                <input type="radio" class="custom-control-input" name="gender" id="male" value="Male" required>
+                <label for="male" class="custom-control-label">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="custom-control-input" name="gender" id="female" value="Female" required>
+                <label for="female" class="custom-control-label">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="custom-control-input" name="gender" id="other" value="other" required>
+                <label for="female" class="custom-control-label">Other</label>
+            </div>
+        </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Profile Picture</label>
+            <input type="file" class="form-control" name="image" id="image" accept="image/*" placeholder="Enter Last Name"  style="border-radius: 2rem;" required>
+        </div>
+    </div>
+    <br>
+<input type="submit" value="Submit" class="btn" style="background-color: dodgerblue; color: white; font-size: larger; width: 8rem; border-radius: 2rem;">
+</form>
+</div>
+{% if messages %}
+<div class="alert alert-primary mt-3">
+    <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endblock %}
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
